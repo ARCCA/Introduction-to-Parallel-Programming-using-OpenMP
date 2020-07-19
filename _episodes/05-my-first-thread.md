@@ -27,13 +27,13 @@ If you haven't done it yet, login to Hawk account and create a directory for the
 
 Copy and unpack the example codes:
 <pre style="color: silver; background: black;">
-~/openmp$ cp /apps/Intro_to_OpenMP.2019.tar.gz .
-~/openmp$ tar –xzvf /apps/Intro_to_OpenMP.2019.tar.gz
+~/openmp$ cp /apps/Intro_to_OpenMP.2020.tar.gz .
+~/openmp$ tar –xzvf /apps/Intro_to_OpenMP.2020.tar.gz
 </pre>
 
 You should have a number of Fortran (.f90) and C (.c) files under two directories:
 <pre style="color: silver; background: black;">
-~/openmp$ ls Intro_to_OpenMP.2019
+~/openmp$ ls Intro_to_OpenMP.2020
 c  fortran
 </pre>
 
