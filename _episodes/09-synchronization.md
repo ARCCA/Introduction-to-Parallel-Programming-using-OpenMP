@@ -1,7 +1,7 @@
 ---
-title: "OpenMP examples (5)"
-teaching: 0
-exercises: 0
+title: "Synchronization"
+teaching: 10
+exercises: 5
 questions:
 - "How to use OpenMP synchronization directives"
 objectives:

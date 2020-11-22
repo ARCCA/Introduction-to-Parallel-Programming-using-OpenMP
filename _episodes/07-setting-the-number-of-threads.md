@@ -1,7 +1,7 @@
 ---
-title: "OpenMP examples (3)"
-teaching: 0
-exercises: 0
+title: "Setting number of threads"
+teaching: 10
+exercises: 5
 questions:
 - "How to control the number of threads created by OpenMP?"
 objectives:

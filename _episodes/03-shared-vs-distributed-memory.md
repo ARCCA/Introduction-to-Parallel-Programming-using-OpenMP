@@ -1,6 +1,6 @@
 ---
 title: "Shared vs Distributed Memory"
-teaching: 0
+teaching: 15
 exercises: 0
 questions:
 - "What is shared memory?"

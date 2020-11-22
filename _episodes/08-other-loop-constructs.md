@@ -1,7 +1,7 @@
 ---
-title: "OpenMP examples (4)"
-teaching: 0
-exercises: 0
+title: "Data sharing"
+teaching: 15
+exercises: 5
 questions:
 - "How to divide a code in sections and assign each section to one thread?"
 - "Another way of assigning only one thread to a programs' region"

@@ -1,7 +1,7 @@
 ---
 title: "Using shared memory"
-teaching: 0
-exercises: 0
+teaching: 15
+exercises: 5
 questions:
 - "What is OpenMP?"
 - "How does it work?"
@@ -21,6 +21,7 @@ keypoints:
 
 You can consult Intel's Parallel Universe magazine original source <a href="https://software.intel.com/sites/default/files/managed/6a/78/parallel_mag_issue18.pdf"> here</a>.
 
+In 2018 OpenMP 5.0 was released, current latest version is OpenMP 5.1 released November 2020.
 
 ## What is OpenMP
 The OpenMP Application Program Interface (OpenMP API) is a collection of compiler directives, library routines, and environment variables that collectively define parallelism in C, C++ and Fortran programs and is portable across architectures from different vendors. Compilers from numerous vendors support the OpenMP API. See http://www.openmp.org for info, specifications, and support. 

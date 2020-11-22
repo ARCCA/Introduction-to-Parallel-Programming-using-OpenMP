@@ -1,7 +1,7 @@
 ---
-title: "OpenMP examples (2)"
-teaching: 0
-exercises: 0
+title: "Basic thread control"
+teaching: 10
+exercises: 5
 questions:
 - "How to obtain OpenMP threads' IDs?"
 - "What is the *barrier* OpenMP construct?"

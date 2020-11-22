@@ -1,6 +1,6 @@
 ---
 title: "Single vs Parallel computers"
-teaching: 0
+teaching: 10
 exercises: 0
 questions:
 - "What we understand as a single computer?"

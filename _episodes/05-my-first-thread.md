@@ -1,7 +1,7 @@
 ---
-title: "OpenMP examples (1)"
-teaching: 0
-exercises: 0
+title: "My First Thread"
+teaching: 20
+exercises: 10
 questions:
 - "How to use OpenMP in C and Fortran?"
 - "OpenMP parallel and loop constructs"
@@ -10,7 +10,7 @@ objectives:
 - "Identify compiler flags to enable OpenMP support"
 - "Familiarize with OpenMP main constructs"
 keypoints:
-- "Importing omp.h in C,C++, omp_lib in Fortran 90 and omp_lib.h in Fortran 77 allows OpenMP functions to be used in your code"
+- "Importing `omp.h` in C,C++, `omp_lib` in Fortran 90 and `omp_lib.h` in Fortran 77 allows OpenMP functions to be used in your code"
 - "OpenMP construct *parallel* in C,C++ and *PARALLEL* instructs the compiler to create a team of threads to distribute the region of the code enclosed by the construct"
 
 

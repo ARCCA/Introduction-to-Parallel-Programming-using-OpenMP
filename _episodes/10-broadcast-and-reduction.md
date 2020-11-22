@@ -1,7 +1,7 @@
 ---
-title: "OpenMP examples (6)"
-teaching: 0
-exercises: 0
+title: "Reduction operation"
+teaching: 15
+exercises: 5
 questions:
 - "How to use OpenMP reduction directives"
 objectives:

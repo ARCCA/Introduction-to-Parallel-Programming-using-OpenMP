@@ -1,7 +1,7 @@
 ---
-title: "Openmp and slurm"
-teaching: 0
-exercises: 0
+title: "OpenMP and slurm"
+teaching: 15
+exercises: 5
 questions:
 - "Some pointers on how to run OpenMP on SLURM"
 objectives:
