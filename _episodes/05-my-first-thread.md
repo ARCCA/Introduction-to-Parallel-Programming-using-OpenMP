@@ -19,24 +19,28 @@ keypoints:
 ## Setting up
 In principle, the exercises on this training lessons can be done on any computer with a compiler that supports OpenMP, but they have been tested on Cardiff University Linux-based supercomputer "Hawk" using Intel compilers 2017.
 
-If you haven't done it yet, login to Hawk account and create a directory for the examples in this training course.
-<pre style="color: silver; background: black;">
-~$ mkdir ~/openmp
-~$ cd ~/openmp
-</pre>
+Access to the system is necessary to undertake this course. It is assumed that attendees have a user account or have received a guest training account.
 
-Copy and unpack the example codes:
-<pre style="color: silver; background: black;">
-~/openmp$ cp /apps/Intro_to_OpenMP.2020.tar.gz .
-~/openmp$ tar –xzvf /apps/Intro_to_OpenMP.2020.tar.gz
-</pre>
+Please follow the instructions below to obtain some example scripts:
 
-You should have a number of Fortran (.f90) and C (.c) files under two directories:
-<pre style="color: silver; background: black;">
-~/openmp$ ls Intro_to_OpenMP.2020
-c  fortran
-</pre>
+1. Download [arc_openmp.zip][zip-file] and extract somewhere on Hawk. 
+2. Extract the zip file and check the extracted directory
 
+For example:
+
+~~~
+$ wget {{ site.url }}{{ site.baseurl }}/data/arc_openmp.zip
+$ unzip arc_openmp.zip
+$ ls arc_openmp
+~~~
+{: .language-bash}
+
+A node reservation is created in partition c_compute_mdi1. To access it users need to specify in their job scripts:
+~~~
+#SBATCH --reservation=training
+#SBATCH --account=scw1148
+~~~
+{: .language-bash}
 
 
 ## Using OpenMP
@@ -212,5 +216,8 @@ Is better to:
 }
 ~~~
 {: .language-c}
+
+[zip-file]: {{ page.root }}/data/arc_openmp.zip
+
 
 {% include links.md %}
