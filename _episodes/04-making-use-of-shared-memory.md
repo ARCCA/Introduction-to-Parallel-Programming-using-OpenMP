@@ -19,12 +19,12 @@ keypoints:
   <img src="{{ page.root }}/fig/OpenMP-history.png" alt="OpenMP-history" width="40%" height="40%">
 </a>
 
-You can consult Intel's Parallel Universe magazine original source <a href="https://software.intel.com/sites/default/files/managed/6a/78/parallel_mag_issue18.pdf"> here</a>.
+You can consult the original in [Intel's Parallel Universe magazine](https://software.intel.com/sites/default/files/managed/6a/78/parallel_mag_issue18.pdf).
 
 In 2018 OpenMP 5.0 was released, current latest version is OpenMP 5.1 released November 2020.
 
 ## What is OpenMP
-The OpenMP Application Program Interface (OpenMP API) is a collection of compiler directives, library routines, and environment variables that collectively define parallelism in C, C++ and Fortran programs and is portable across architectures from different vendors. Compilers from numerous vendors support the OpenMP API. See http://www.openmp.org for info, specifications, and support. 
+The OpenMP Application Program Interface (OpenMP API) is a collection of compiler directives, library routines, and environment variables that collectively define parallelism in C, C++ and Fortran programs and is portable across architectures from different vendors. Compilers from numerous vendors support the OpenMP API. See [http://www.openmp.org](http://www.openmp.org) for info, specifications, and support. 
 
 
 > ## OpenMP in Hawk
@@ -81,7 +81,7 @@ The OpenMP Application Program Interface (OpenMP API) is a collection of compile
 - OpenMP is limited to shared memory since it cannot communicate across nodes like MPI.
 
 ## How does it work?
-Every code has serial and (hopefully) parallel sections. It is the job of the programmer to identify the latter and decide how best to implement parallelization. Using OpenMP this is achieved by using special directives (**#pragmas**) that mark sections of the code to be distributed among threads. There is a master thread and several slave threads. The latter execute the parallelized section of the code independently and report back to the master thread. When all threads have finished, the master can continue with the program execution.
+Every code has serial and (hopefully) parallel sections. It is the job of the programmer to identify the latter and decide how best to implement parallelization. Using OpenMP this is achieved by using special directives (**#pragma**)s that mark sections of the code to be distributed among threads. There is a master thread and several slave threads. The latter execute the parallelized section of the code independently and report back to the master thread. When all threads have finished, the master can continue with the program execution.
 OpenMP directives allow programmers to specify:
 - the parallel regions in a code
 - how to parallelize loops
@@ -112,8 +112,8 @@ for (i=0; i < N; i++)
 
 ## Further reading
 
-https://www.openmp.org/resources/openmp-compilers-tools/
+[https://www.openmp.org/resources/openmp-compilers-tools/](https://www.openmp.org/resources/openmp-compilers-tools/)
 Very comprehensive tutorial:
-https://computing.llnl.gov/tutorials/openMP
+[https://computing.llnl.gov/tutorials/openMP](https://computing.llnl.gov/tutorials/openMP)
 
 {% include links.md %}
