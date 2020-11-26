@@ -92,6 +92,7 @@ In order to enables the creation of multi-threaded code based on OpenMP directiv
 {: .callout}
 
 ## My first thread
+
 In this first example we will take a look at how to use OpenMP directives to parallelize sections of our code. But before been able to compile, we need a compiler with OpenMP support. Hawk provides several options but for this training course we will use Intel compilers 2017:
 <pre style="color: silver; background: black;">
 ~$ module load compiler/intel/2017/7
@@ -125,6 +126,7 @@ int main()
 {: .challenge}
 
 ## The PARALLEL construct
+
 This is the fundamental OpenMP construct for threading operations that defines a parallel region. When a thread encounters a *parallel* construct, a team of threads is created to execute the parallel region. The thread that encountered the parallel construct becomes the master thread of the new team, with a thread number of zero for the duration of the new parallel region. All threads in the new team, including the master thread, execute the region. The syntax of the *parallel* construct is as follows:  
 
 Fortran:
@@ -147,7 +149,7 @@ C, C++:
 ### Clauses
 OpenMP is a shared memory programming model where most variables are visible to all threads by default. However, private variables are necessary sometimes to avoid race conditions and to pass values between the sequential part and the parallel region. Clauses are a data sharing attributes that allow data environment management by appending them to OpenMP directives
 
-For example, a *private* (*PRIVATE*) clause declares variables to be private to each thread in a team. Private copies of the variable are initialized from the original object when entering the parallel region. A *shared* (*SHARED*) clause specifically shares variables among all the threads in a team, this is the default behaviour. A full list of clauses can be found in <a href="https://www.openmp.org/spec-html/5.0/openmpse14.html">OpenMP documentation</a>.
+For example, a `private` clause declares variables to be private to each thread in a team. Private copies of the variable are initialized from the original object when entering the parallel region. A `shared` clause specifically shares variables among all the threads in a team, this is the default behaviour. A full list of clauses can be found in [OpenMP documentation](https://www.openmp.org/spec-html/5.0/openmpse14.html).
 
 ## Loop constructs
 
@@ -163,15 +165,32 @@ The DO (Fortran) directive splits the following do loop across multiple threads.
 
 Similarly, the “for” (C) directive splits the following do loop across multiple threads. Notice that no curly brackets are needed in this case.
 ~~~
-pragma omp for 
+#pragma omp for [clause,[clause...]] 
     for_loop 
 ~~~
 {: .language-c}
 
 OpenMP clauses can also define how the loop iterations run across threads. They include:
-- SCHEDULE: How many chunks of the loop are allocated per thread.
-- ORDERED: Loop will be executed as it would in serial, i.e. in order.
+
+*SCHEDULE*: How many chunks of the loop are allocated per thread.
+
+Possible options are:
+
+ - `schedule(static, chunk-size)` : Gives threads chunks of size `chunk-size` in circular order around thread id.
+   `chunk-size` is optional, default is to divide up work to give one chunk to each thread.
+ - `schedule(dynamic, chunk-size)` : Gives threads chunks of size `chunk-size` and when complete gives another chunk
+   until complete.  `chunk-size` is optional, default is 1.
+ - `schedule(guided, chunk-size)` : Minimum size given by `chunk-size` but size of chunk initially is given by
+   unassigned iterations divided by number of threads.
+ - `schedule(auto)` : Decision is given to the compiler of runtime.
+
+Auto schedule can be set with `OMP_SCHEDULE` at runtime or `omp_set_schedule` in the code at compile time.
+
+If no *SCHEDULE* is given then compiler dependent default is used.
+
+*ORDERED*: Loop will be executed as it would in serial, i.e. in order.
 These clauses are useful when trying to fine-tune the behaviour of our code, but caution should be observed since they can introduced unwanted communication overheads.
+
 
 > ## Working with private variables and loop constructs
 >
@@ -181,6 +200,7 @@ These clauses are useful when trying to fine-tune the behaviour of our code, but
 {: .challenge}
 
 ## WORKSHARE
+
 The *WORKSHARE* construct is a Fortran feature that consists of a region with a single structure block (section of code). Statements in the work share region are divided into units of work and executed (once) by threads of the team. A good example for block would be array assignment statements (I.e. no DO)
 
 ~~~
@@ -191,7 +211,9 @@ The *WORKSHARE* construct is a Fortran feature that consists of a region with a 
 {: .language-fortran}
 
 ## Thread creation
+
 Creating OpenMP threads add an overhead to the program's overall runtime and for small loops this can be expensive enough that it doesn't make sense to parallelize that section of the code. If there are several sections of code that require threading, it is better to parallelize the entire program and specify where the workload should be distributed among the threads team.
+
 ~~~
 #pragma omp parallel for ... 
 for (int i=0; i<k; i++)

@@ -152,8 +152,8 @@ int main()
             int tid = omp_get_thread_num();
             int my_cost;
             my_cost = rand() % 100;
-            //#pragma omp critical
             printf("tid %i -  %i\n",tid,my_cost);
+            //#pragma omp critical
             if(best_cost > my_cost)
             {
                 printf("tid %i says that %i is lower than %i \n",tid,my_cost,best_cost);

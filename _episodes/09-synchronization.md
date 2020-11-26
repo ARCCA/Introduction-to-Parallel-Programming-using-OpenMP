@@ -73,7 +73,7 @@ We might want to rewrite this code to work in parallel. Perhaps our counter is k
 >        {
 >            incr = incr + 1;
 >        }
-> 
+>        #pragma omp barrier 
 >        // The master thread prints out the results of the calculation and
 >        // then does some other processing that the other threads have to
 >        // wait for.

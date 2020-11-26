@@ -3,33 +3,28 @@ title: "OpenMP and slurm"
 teaching: 15
 exercises: 5
 questions:
-- "Some pointers on how to run OpenMP on SLURM"
+- "Some pointers on how to run OpenMP on Slurm"
 objectives:
-- "Some considerations when submitting OpenMP jobs to SLURM"
+- "Some considerations when submitting OpenMP jobs to Slurm"
 keypoints:
-- "Use SLURM *--cpus-per-task* option to request the number of threads"
+- "Use Slurm *--cpus-per-task* option to request the number of threads"
 - "Set OMP_NUM_THREADS equal to the number of cpus per task requested"
 - "Be careful not to exceed the number of cores available per node"
 ---
 
-## Using OpenMP and SLURM together
-SLURM can handle setting up OpenMP environment for you, but you still need to do some work.
+## Using OpenMP and Slurm together
+Slurm can handle setting up OpenMP environment for you, but you still need to do some work.
 ~~~
 ....
 #SBATCH –-cpus-per-task=2
 ...
 
-# SLURM variable SLURM_CPUS_PER_TASK is set to the value
+# Slurm variable SLURM_CPUS_PER_TASK is set to the value
 # of --cpus-per-task, but only if explicitly set
 
 # Set OMP_NUM_THREADS to the same value as --cpus-per-task
 # with a fallback option in case it isn't set.
-if [ -n "$SLURM_CPUS_PER_TASK" ]; then
-  omp_threads=$SLURM_CPUS_PER_TASK
-else
-  omp_threads=1
-fi
-export OMP_NUM_THREADS=$omp_threads
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 ... run your OpenMP program ...
 
@@ -46,26 +41,33 @@ If using MPI and OpenMP you have to be careful to specify --ntasks-per-node and 
 #SBATCH –-cpus-per-task=2
 ...
 
-# SLURM variable SLURM_CPUS_PER_TASK is set to the value
+# Slurm variable SLURM_CPUS_PER_TASK is set to the value
 # of --cpus-per-task, but only if explicitly set
 
 # Set OMP_NUM_THREADS to the same value as --cpus-per-task
 # with a fallback option in case it isn't set.
-if [ -n "$SLURM_CPUS_PER_TASK" ]; then
-  omp_threads=$SLURM_CPUS_PER_TASK
-else
-  omp_threads=1
-fi
-export OMP_NUM_THREADS=$omp_threads
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 ... run your MPI/OpenMP program ...
 
 ~~~
 {: .language-bash}
 
+## High-level control
+
+Slurm has options to control how CPUs are allocated.  See the `man` pages or try the following for `sbatch`.
+
+`--sockets-per-node=S` : Number of sockets in a node to dedicate to a job (minimum)
+
+`--cores-per-socket=C` : Number of cores in a socket to dedicate to a job (minimum)
+
+`--threads-per-core=T` : Number of threads in a core to dedicate to a job (minimum)
+
+`-B S[:C[:T]]` : Combined shortcut option for `--sockets-per-node`, `--cores-per_cpu`, `--threads-per_core` 
 
 ## Further training material
-- https://www.openmp.org/resources/tutorials-articles/
-- https://hpc.llnl.gov/training/tutorials
+
+- [https://www.openmp.org/resources/tutorials-articles/](https://www.openmp.org/resources/tutorials-articles/)
+- [https://hpc.llnl.gov/training/tutorials](https://hpc.llnl.gov/training/tutorials)
 
 {% include links.md %}
