@@ -151,6 +151,8 @@ int main()
         {
             int tid = omp_get_thread_num();
             int my_cost;
+            // Be careful using rand inside parallel region.
+            // Some rand implementations may not be thread safe.
             my_cost = rand() % 100;
             printf("tid %i -  %i\n",tid,my_cost);
             //#pragma omp critical
