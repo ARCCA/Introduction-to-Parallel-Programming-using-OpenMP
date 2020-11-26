@@ -41,7 +41,7 @@ When we talk about a computer's speed, we typically are referring to its perform
 > - Xeon Gold 6148 (Skylake) at 2.4GHz clock speed, 20 **cores** per node and support for AVX512 instructions.
 > - AMD Epyc Rome 7502 at 2.5 GHz clock speed, 32 **cores** per node and support for AVX256 instructions. 
 > 
-> Find out more here: [https://portal.supercomputing.wales/index.php/about-hawk/]
+> Find out more here: (https://portal.supercomputing.wales/index.php/about-hawk/)
 >
 {: .callout}
 
