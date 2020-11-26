@@ -1,5 +1,5 @@
 ---
-title: "OpenMP and slurm"
+title: "OpenMP and Slurm"
 teaching: 15
 exercises: 5
 questions:
