@@ -113,7 +113,9 @@ for (i=0; i < N; i++)
 ## Further reading
 
 [https://www.openmp.org/resources/openmp-compilers-tools/](https://www.openmp.org/resources/openmp-compilers-tools/)
+
 Very comprehensive tutorial:
+
 [https://computing.llnl.gov/tutorials/openMP](https://computing.llnl.gov/tutorials/openMP)
 
 {% include links.md %}
