@@ -68,6 +68,6 @@ Slurm has options to control how CPUs are allocated.  See the `man` pages or try
 ## Further training material
 
 - [https://www.openmp.org/resources/tutorials-articles/](https://www.openmp.org/resources/tutorials-articles/)
-- [https://hpc.llnl.gov/training/tutorials](https://hpc.llnl.gov/training/tutorials)
+- [https://hpc-tutorials.llnl.gov/](https://hpc-tutorials.llnl.gov/)
 
 {% include links.md %}
