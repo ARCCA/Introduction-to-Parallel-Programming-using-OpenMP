@@ -26,4 +26,8 @@ A node reservation is created in partition c_compute_mdi1. To access it users ne
 
 [zip-file]: {{ page.root }}/data/arc_openmp.zip
 
+## OpenMP
+
+If not using Hawk, a modern compiler is required to support OpenMP such as Gcc, Intel or Clang.
+
 {% include links.md %}
