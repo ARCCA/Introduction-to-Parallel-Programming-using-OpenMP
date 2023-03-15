@@ -28,9 +28,21 @@ If using Fortran:
 ~~~
 {: .language-fortran}
 
+or the default value using the function
+~~~
+omp_set_num_threads(4)
+~~~
+{: .language-fortran}
+
 If using C,C++:
 ~~~
 #pragma omp parallel private(tnum) num_threads(4)
+~~~
+{: .language-c}
+
+or the default value using the function
+~~~
+omp_set_num_threads(4)
 ~~~
 {: .language-c}
 
