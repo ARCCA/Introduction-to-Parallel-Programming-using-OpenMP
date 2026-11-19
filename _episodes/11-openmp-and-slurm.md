@@ -7,13 +7,14 @@ questions:
 objectives:
 - "Some considerations when submitting OpenMP jobs to Slurm"
 keypoints:
-- "Use Slurm *--cpus-per-task* option to request the number of threads"
-- "Set OMP_NUM_THREADS equal to the number of cpus per task requested"
+- "Use Slurm `--cpus-per-task` directive to request the number of threads"
+- "Set `OMP_NUM_THREADS` equal to the number of cpus per task requested"
 - "Be careful not to exceed the number of cores available per node"
 ---
 
 ## Using OpenMP and Slurm together
-Slurm can handle setting up OpenMP environment for you, but you still need to do some work.
+Slurm can handle setting up an OpenMP environment for you, but you still need to
+do some work.
 ~~~
 ....
 #SBATCH –-cpus-per-task=2
@@ -32,7 +33,9 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 {: .language-bash}
 
 Make sure you specify tasks as 1 if only using OpenMP.
-If using MPI and OpenMP you have to be careful to specify --ntasks-per-node and --cpus-per-task to not exceed the number of cores on the node.
+If using MPI and OpenMP you have to be careful how you specify the values of
+`--ntasks-per-node` and `--cpus-per-task` so that their product do not exceed
+the number of cores in the node.
 
 ~~~
 ....
@@ -55,7 +58,8 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
 
 ## High-level control
 
-Slurm has options to control how CPUs are allocated.  See the `man` pages or try the following for `sbatch`.
+Slurm has options to control how CPUs are allocated.  See the `man` pages or try
+the following for `sbatch`.
 
 `--sockets-per-node=S` : Number of sockets in a node to dedicate to a job (minimum)
 

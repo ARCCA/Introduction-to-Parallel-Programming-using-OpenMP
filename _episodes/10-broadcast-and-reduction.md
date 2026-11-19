@@ -5,26 +5,41 @@ exercises: 5
 questions:
 - "How to use OpenMP reduction directives"
 objectives:
-- "Use *copyprivate* and *reduction* constructs to communicate data among threads"
+- "Use `copyprivate` and `reduction` constructs to communicate data among threads"
 keypoints:
-- "OpenMP constructs *copyprivate* and *reduction* are useful to pass values obtained by a one or more threads to other threads in the team, and to perform some recurrence calculations in parallel" 
+- "OpenMP constructs `copyprivate` and `reduction` are useful to pass values
+   obtained by a one or more threads to other threads in the team, and to perform
+   some recurrence calculations in parallel" 
 ---
 
 ## Broadcast and reduction
-At the end of a parallel block performing some computation, it is often useful to consolidate the result held by a private variable in each thread into single value, often performing some operation on it in the process.
-- **copyprivate** Broadcast a single value to a private variable in each thread
-- **reduction** Perform an operation on each threaded private variable and store the result in a global shared variable.
+At the end of a parallel block performing some computation, it is often useful
+to consolidate the result held by a private variable in each thread into single
+value, often performing some operation on it in the process.
 
-Let us take consider the following example. The serial version of this code simply obtains and prints a value to broadcast (in this case its thread ID number) and then performs a calculation of 2 elevated to the power given by its thread ID number and prints the result.
+- `copyprivate` Broadcast a single value to a private variable in each thread
+- `reduction` Perform an operation on each threaded private variable and store
+   the result in a global shared variable.
 
-In parallel, the aim is to keep the section of the code where only one thread obtains the broadcast value, but then communicates it to the other threads in the team. And then, have each thread perform the calculation using its own ID number. At the end of the program we want to print the sum of the individual values calculated by each thread.
+Consider the following example. The serial version of this code simply obtains
+and prints a value to broadcast (in this case its thread ID number) and then
+performs a calculation of 2 elevated to the power given by its thread ID number
+and prints the result.
+
+In parallel, the aim is to keep the section of the code where only one thread
+obtains the broadcast value, but then communicates it to the other threads in the
+team. And then, have each thread perform the calculation using its own ID number.
+At the end of the program we want to print the sum of the individual values
+calculated by each thread.
 
 
 > ## Example (serial)
 > ~~~
+> // reduc.c
 > // Load the OpenMP functions library
 > #include<omp.h>
 > #include<math.h> //for pow function
+> #include<stdio.h>
 > 
 > int main()
 > {
@@ -52,8 +67,10 @@ In parallel, the aim is to keep the section of the code where only one thread ob
 
 > ## Example (parallel)
 > ~~~
+> // reduc.c
 > #include<omp.h>
 > #include<math.h> //for pow function
+> #include<stdio.h>
 > 
 > int main()
 > {
@@ -96,12 +113,19 @@ In parallel, the aim is to keep the section of the code where only one thread ob
 
 
 > ## Using broadcast and reduction constructs
-> Let us begin by confirming that our code behaves in serial mode in the way we expect. For this you don't need to make any modifications since the OpenMP directives are commented out at the moment. Go ahead and compile the code:
+> Once again, let us begin by confirming that our code behaves in serial mode in
+> the way we expect. For this you don't need to make any modifications since the
+> OpenMP directives are commented out at the moment. Go ahead and compile the code
+> (notice we are using `-lm` to link against the math library in Linux for the use
+> of the `pow` function):
 > <pre style="color: silver; background: black;">
-> ~/openmp/Intro_to_OpenMP.2019/c$ icc -qopenmp -o reduc reduc.c
+> gcc -fopenmp -o reduc -lm reduc.c
+> ./reduc
 > </pre>
 >
-> Once we are satisfied with the serial version of the code, uncomment the OpenMP directives that create the *parallel* region. Use **broadcast** and **reduction** to achieve the objectives of this exercise. Did you run into any issues?
+> Once we are satisfied with the serial version of the code, uncomment the OpenMP
+> directives that create the `parallel` region. Use`broadcast` and `reduction`
+> to achieve the objectives of this exercise. Did you run into any issues?
 >
 {: .challenge}
 

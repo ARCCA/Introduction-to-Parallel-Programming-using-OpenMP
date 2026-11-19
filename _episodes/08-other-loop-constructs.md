@@ -6,29 +6,38 @@ questions:
 - "How to divide a code in sections and assign each section to one thread?"
 - "Another way of assigning only one thread to a programs' region"
 objectives:
-- "Learn to use OpenMP *sections* and *single* constructs to better control how work is divided among threads"
+- "Learn to use OpenMP `sections` and `single` constructs to better control how
+   work is divided among threads"
 - "Understand the effect of implicit barriers and how to remove them"
 keypoints:
-- "The OpenMP *sections* construct allow us to divide a code in regions to be executed by individual threads"
-- "The OpenMP *single* construct specifies that a code region should only be executed by one thread"
-- "Many OpenMP constructs apply an implicit barrier at the end of its defined region. This can be overruled with *nowait* clause. However, this should be done carefully as to avoid data conflicts and race conditions"
+- "The OpenMP `sections` construct allow us to divide a code in regions to be
+   executed by individual threads"
+- "The OpenMP `single` construct specifies that a code region should only be
+   executed by one thread"
+- "Many OpenMP constructs apply an implicit `barrier` at the end of its defined
+   region. This can be overruled with `nowait` clause. However, this should be
+   done carefully as to avoid data conflicts and race conditions"
 ---
 
 ## Other loop constructs
-This time we have a code that have two well defined tasks to perform: 
+This time we have a code that have **two** well defined tasks to perform: 
 1) print a thread number
-2) print a thread number, the total number of threads available, and the sum of all thread IDs.
+2) print a thread number, the total number of threads available, and the sum of
+   all thread IDs.
 
-In serial mode these tasks will be performed by the only thread available (0). But in parallel we can assign them to one thread each.
+In serial mode these tasks will be performed by the only thread available (0).
+But in parallel we can assign them to one thread each.
 
 We will modify our example to add OpenMP directives that allow us to:
 - Create a parallel region to be distributed among available threads
-- Create a *sections* block to distribute available blocks to single threads
-- Blocks are identified with a *section* directive
+- Create a `sections` block to distribute available blocks to single threads
+- Blocks are identified with a `section` directive
  
 ~~~
+// constructs.c
 // Load the OpenMP functions library
 #include<omp.h>
+#include <stdio.h>
 
 int main()
 {
@@ -87,43 +96,62 @@ int main()
 {: .language-c}
 
 > ## Creating sections
-> Let us begin by confirming that our code behaves in serial mode in the way we expect. For this you don't need to make any modifications since the OpenMP directives are commented out at the moment. Go ahead and compile the code:
+> Let us again begin by confirming that our code behaves in serial mode in the way
+> we expect. For this you don't need to make any modifications since the OpenMP
+> directives are commented out at the moment. Go ahead and compile the code:
 > <pre style="color: silver; background: black;">
-> ~/openmp/Intro_to_OpenMP.2019/c$ icc -qopenmp -o constructs constructs.c
+> gcc -fopenmp -o constructs constructs.c
+> ./constructs
 > </pre>
 >
-> Once we are satisfied with the serial version of the code, uncomment the OpenMP directives that create the *parallel* and *sections* regions. Recompile and run again. How does it behave?
+> Once we are satisfied with the serial version of the code, uncomment the OpenMP
+> directives that create the `parallel` and `sections` regions. Recompile and run
+> again. How does it behave?
 >
 {: .challenge}
 
 > ## Single thread
 >
-> The output of our program looks a bit lengthy due to all threads reaching the last printing command. If we wanted this section to be executed by only one thread we could try using OpenMP directive *single*. Go ahead and uncomment this directive. Recompile and run the program. What is the output this time?
+> The output of our program looks a bit lengthy due to all threads reaching the
+> last printing command. If we wanted this section to be executed by only one
+> thread we could try using OpenMP directive `single`. Go ahead and uncomment this
+> directive. Recompile and run the program. What is the output this time?
 > 
 {: .challenge}
 
 > ## Implicit barriers
 > 
-> Our *sections* OpenMP directive by default creates an implicit barrier at the end of its defined region. In our example we removed it with a *nowait* clause that caused threads to continue executing the program without waiting for all other threads to finish the *sections* region. Several constructs have this behaviour (e.g. *parallel*, *single*)
+> Our `sections` OpenMP directive by default creates an implicit barrier at the
+> end of its defined region. In our example we removed it with a `nowait` clause
+> that caused threads to continue executing the program without waiting for all
+> other threads to finish the `sections` region. Several constructs have this
+> behaviour (e.g. `parallel`, `single`)
 > ~~~
 > #pragma omp sections private(tnum, i) nowait
 > ~~~
 > {: .language-c}
 >
-> Try removing the *nowait* clause. Recompile and run the program. How it behaves this time? Can you see the effect of the implicit barrier?
+> Try removing the `nowait` clause. Recompile and run the program. How it behaves
+> this time? Can you see the effect of the implicit barrier?
 >
 {: .challenge}
 
 ## Sections
-The sections construct is a non-iterative worksharing construct that contains a set of structured blocks that are to be distributed among and executed by the threads in a team. Each structured block is executed once by one of the threads in the team in the context of its implicit task. 
+The `sections` construct is a non-iterative worksharing construct that contains a
+set of structured blocks that are to be distributed among and executed by the
+threads in a team. Each structured block is executed once by one of the threads in
+the team.
 
 ## Single
-The single construct specifies that the associated structured block is executed by only one of the threads in the team (not necessarily the master thread), in the context of its implicit task. The other threads in the team, which do not execute the block, wait at an implicit barrier at the end of the single construct unless a nowait clause is specified. 
+The `single` construct specifies that the associated structured block is executed
+by only one of the threads in the team (not necessarily the master thread). The
+other threads in the team, which do not execute the block, wait at an implicit
+barrier at the end of the`single` construct unless a `nowait` clause is specified. 
 
 > ## OpenMP parallelization strategy
 > 
 > - Start with a correct serial execution of the application 
-> - Apply OpenMP directives to time-consuming do loops one at a time and TEST 
+> - Apply OpenMP directives to time-consuming `do` loops one at a time and TEST 
 > - Keep private variables and race conditions always in mind
 > - Use a profiler or debugger in case of strange results or crashes
 > - Results should be bit reproducible for different numbers of threads
@@ -133,9 +161,16 @@ The single construct specifies that the associated structured block is executed 
 {: .checklist}
 
 ## Race conditions
-Consider the following example. Where we are looking at estimating a best cost through a computationally expensive function (a random function for the sake of demonstration). We perform a for loop in which we compare with previous obtained costs and if a new minimum is found, the best cost is updated. At the end we print the overall best cost.
+Consider the following example. Where we are looking at estimating a **best cost**
+through a computationally expensive function (a random function for the sake of
+demonstration). We perform a `for` loop in which we compare with previous obtained
+costs and if a new minimum is found, the best cost is updated. At the end we print
+the overall best cost.
+
 ~~~
+// race.c
 #include<omp.h>
+#include<stdio.h>
 #include<stdlib.h>
 
 int main()
@@ -170,23 +205,30 @@ int main()
 
 > ## Debugging race conditions
 >
-> Try running in serial mode (compile without *-qopenmp* flag) the example above and analize the ouput.
+> Try running in serial mode (by setting `OMP_NUM_THREADS` and analize the ouput.
 > <pre style="color: silver; background: black;">
-> ~/openmp/Intro_to_OpenMP.2019/c$ icc -o race race.c
+> export OMP_NUM_THREADS=1
+> gcc -fopenmp -o race race.c
+> ./race
 > </pre>
 >
-> Does it work as expected? Try this time adding openmp support to parallelize the for loop:
+> Does it work as expected? Try this time with more threads (e.g. 8):
 > <pre style="color: silver; background: black;">
-> ~/openmp/Intro_to_OpenMP.2019/c$ icc -qopenmo -o race race.c
+> export OMP_NUM_THREADS=8
+> gcc -fopenmp -o race race.c
+> ./race
 > </pre>
 >
 > What do you notice?
 {: .challenge}
 
 ### Critical
-When ensuring that shared date is accessed only by one thread at a time, you can use the *critical* construct. Try adding the following directive immediately before our if statement:
+To ensure that shared data is accessed only by one thread at a time, you can
+use the `critical` construct. Try adding the following directive immediately
+before our `if` statement:
 ~~~
 #pragma omp critical
+if(best_cost > my_cost)
 {
  ...
 }

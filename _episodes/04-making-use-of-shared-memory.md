@@ -21,19 +21,19 @@ keypoints:
 
 You can consult the original in [Intel's Parallel Universe magazine](https://software.intel.com/sites/default/files/managed/6a/78/parallel_mag_issue18.pdf).
 
-In 2018 OpenMP 5.0 was released, current latest version is OpenMP 5.1 released November 2020.
+In 2018 OpenMP 5.0 was released, current latest version is OpenMP 6.1 released November 2026.
 
 ## What is OpenMP
 The OpenMP Application Program Interface (OpenMP API) is a collection of compiler directives, library routines, and environment variables that collectively define parallelism in C, C++ and Fortran programs and is portable across architectures from different vendors. Compilers from numerous vendors support the OpenMP API. See [http://www.openmp.org](http://www.openmp.org) for info, specifications, and support. 
 
 
-> ## OpenMP in Hawk
+> ## OpenMP in Falcon
 >
-> Different compilers can support different versions of OpenMP. You can check compatibility by extracting the value of the _OPENMP macro name that is defined to have the decimal value *yyyymm* where *yyyy* and *mm* are the year and month designations of the version of the OpenMP API that the implementation supports. For example, using GNU compilers in Hawk:
+> Different compilers can support different versions of OpenMP. You can check compatibility by extracting the value of the _OPENMP macro name that is defined to have the decimal value *yyyymm* where *yyyy* and *mm* are the year and month designations of the version of the OpenMP API that the implementation supports. For example, using GNU compilers in Falcon:
 > 
 > <pre style="color: silver; background: black;">
-> ~$ module load compiler/gnu/9/2.0
-> ~$  echo | cpp -fopenmp -dM | grep -i open
+> $ module load GCC/15.2.0
+> $ echo | cpp -fopenmp -dM | grep -i open
 > #define _OPENMP 201511
 > </pre>
 > Which indicates that GNU 9.2.0 compilers support OpenMP 4.5 (released on November 2015). Other possible versions are:
