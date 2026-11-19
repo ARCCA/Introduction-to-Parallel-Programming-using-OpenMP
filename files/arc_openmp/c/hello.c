@@ -1,12 +1,13 @@
 // Load the OpenMP functions library
 #include<omp.h>
+#include <stdio.h>
 
 int main()
   {
     int nthreads, tid;
     // Fork a team of threads, with private versions of the declared variables.
-    // #pragma omp parallel private(nthreads, tid)
-    // {
+    //#pragma omp parallel private(nthreads, tid)
+    //{
     // Get the thread number and print it 
     tid = omp_get_thread_num();
     printf("Hello World from thread number %d\n", tid);

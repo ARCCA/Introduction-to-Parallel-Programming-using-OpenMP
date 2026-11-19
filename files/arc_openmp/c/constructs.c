@@ -1,5 +1,6 @@
 // Load the OpenMP functions library
 #include<omp.h>
+#include <stdio.h>
 
 int main()
 {

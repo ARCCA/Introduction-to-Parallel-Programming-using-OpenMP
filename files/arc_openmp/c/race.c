@@ -1,4 +1,6 @@
+//race.c
 #include<omp.h>
+#include<stdio.h>
 #include<stdlib.h>
 
 int main()
@@ -34,4 +36,3 @@ int main()
      }
      printf("Best cost %d\n",best_cost);
 }
-

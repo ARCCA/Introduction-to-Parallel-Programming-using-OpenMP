@@ -1,5 +1,8 @@
+// sync.c
 // Load the OpenMP functions library
 #include<omp.h>
+#include<stdio.h>
+#include<unistd.h>
 
 int main()
 {

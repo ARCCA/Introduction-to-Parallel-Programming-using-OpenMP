@@ -1,6 +1,8 @@
+// reduc.c
 // Load the OpenMP functions library
 #include<omp.h>
 #include<math.h> //for pow function
+#include<stdio.h>
 
 int main()
 {
